@@ -134,6 +134,10 @@ body {
       padding-bottom: 20px;
     }
 
+    .poem-text strong {
+      color: #1e74ff;
+    }
+
     /* Custom Slim Scrollbar */
     .letter::-webkit-scrollbar {
       width: 5px;
