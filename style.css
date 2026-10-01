@@ -1,0 +1,164 @@
+:root {
+    --bg-color: #ffacbd;
+    --env-base: #a2d2ff;
+    --env-dark: #8ec5fc;
+    --env-flap: #bde0fe;
+    --letter-bg: #ffffff;
+    --text-color: #2b3a4a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-color);
+    font-family: 'Georgia', serif;
+    overflow-x: hidden;
+    padding: 120px 0 60px 0;
+}
+
+    .container {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hint {
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      color: #64748b;
+      letter-spacing: 0.05em;
+      transition: opacity 0.3s ease;
+      user-select: none;
+    }
+
+    /* Envelope Base */
+    .envelope-wrapper {
+      position: relative;
+      width: 320px;
+      height: 200px;
+      background-color: var(--env-dark);
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Top Flap */
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 110px solid var(--env-flap);
+      transform-origin: top;
+      transition: transform 0.5s ease-in-out, z-index 0.2s 0.2s;
+      z-index: 4;
+    }
+
+    /* Envelope Pocket (Front Side & Bottom Fold) */
+    .pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid var(--env-base);
+      border-right: 160px solid var(--env-base);
+      border-top: 100px solid transparent;
+      border-bottom: 100px solid var(--env-base);
+      border-radius: 0 0 10px 10px;
+      z-index: 3;
+    }
+
+    /* The Poem Letter */
+    .letter {
+      position: absolute;
+      bottom: 5px;
+      left: 15px;
+      width: 290px;
+      height: 180px;
+      background: var(--letter-bg);
+      border-radius: 8px;
+      padding: 16px 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 2;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                  height 0.5s ease 0.3s, 
+                  z-index 0.1s ease 0.3s;
+      overflow: hidden;
+      display: block;
+      text-align: center;
+    }
+
+    /* Top Image */ 
+    .letter-image {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin: 0 auto 16px auto;
+    }
+
+    .poem-content {
+      width: 100%;
+    }
+
+    .poem-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .poem-text {
+      color: #ff0a74;
+      font-size: 0.85rem;
+      line-height: 1.65;
+      font-style: italic;
+      white-space: normal;
+      padding-bottom: 20px;
+    }
+
+    /* Custom Slim Scrollbar */
+    .letter::-webkit-scrollbar {
+      width: 5px;
+    }
+  
+    .letter::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    /* Open State */
+    .container.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+      transition: transform 0.4s ease-in-out, z-index 0.2s;
+    }
+
+    .container.open .letter {
+      transform: translateY(-160px);
+      height: 260px;
+      z-index: 5;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+    }
+
+    .container.open .hint {
+      opacity: 0.3;
+    }
